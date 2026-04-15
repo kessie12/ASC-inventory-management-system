@@ -1,5 +1,7 @@
 # Inventory Management System
 
+<!-- security review scan -->
+
 [![GitHub](https://img.shields.io/github/license/kryptonb/inventory-management-system.svg?style=popout)](https://choosealicense.com/licenses/mit/)
 
 A simple PHP web system for managing an inventory.  
