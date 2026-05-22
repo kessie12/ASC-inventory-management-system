@@ -1,15 +1,16 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
-	
+	require_once('../../inc/security.php');
+
 	if(isset($_POST['purchaseDetailsItemNumber'])){
 
-		$purchaseDetailsItemNumber = htmlentities($_POST['purchaseDetailsItemNumber']);
-		$purchaseDetailsPurchaseDate = htmlentities($_POST['purchaseDetailsPurchaseDate']);
-		$purchaseDetailsItemName = htmlentities($_POST['purchaseDetailsItemName']);
-		$purchaseDetailsQuantity = htmlentities($_POST['purchaseDetailsQuantity']);
-		$purchaseDetailsUnitPrice = htmlentities($_POST['purchaseDetailsUnitPrice']);
-		$purchaseDetailsVendorName = htmlentities($_POST['purchaseDetailsVendorName']);
+		$purchaseDetailsItemNumber = $_POST['purchaseDetailsItemNumber'];
+		$purchaseDetailsPurchaseDate = $_POST['purchaseDetailsPurchaseDate'];
+		$purchaseDetailsItemName = $_POST['purchaseDetailsItemName'];
+		$purchaseDetailsQuantity = $_POST['purchaseDetailsQuantity'];
+		$purchaseDetailsUnitPrice = $_POST['purchaseDetailsUnitPrice'];
+		$purchaseDetailsVendorName = $_POST['purchaseDetailsVendorName'];
 		
 		$initialStock = 0;
 		$newStock = 0;
@@ -42,7 +43,7 @@
 			}
 			
 			// Sanitize item number
-			$purchaseDetailsItemNumber = filter_var($purchaseDetailsItemNumber, FILTER_SANITIZE_STRING);
+			$purchaseDetailsItemNumber = strip_tags($purchaseDetailsItemNumber);
 			
 			// Validate item quantity. It has to be an integer
 			if(filter_var($purchaseDetailsQuantity, FILTER_VALIDATE_INT) === 0 || filter_var($purchaseDetailsQuantity, FILTER_VALIDATE_INT)){

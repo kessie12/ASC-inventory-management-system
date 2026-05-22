@@ -8,6 +8,7 @@
 	
 	require_once('inc/config/constants.php');
 	require_once('inc/config/db.php');
+	require_once('inc/security.php');
 	require_once('inc/header.html');
 ?>
   <body>

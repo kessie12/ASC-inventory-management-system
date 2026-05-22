@@ -1,8 +1,9 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
-	$itemNumber = htmlentities($_POST['itemDetailsItemNumber']);
+	$itemNumber = $_POST['itemDetailsItemNumber'];
 	
 	if(isset($_POST['itemDetailsItemNumber'])){
 		
@@ -10,7 +11,7 @@
 		if(!empty($itemNumber)){
 			
 			// Sanitize item number
-			$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
+			$itemNumber = strip_tags($itemNumber);
 
 			// Check if the item is in the database
 			$itemSql = 'SELECT itemNumber FROM item WHERE itemNumber=:itemNumber';

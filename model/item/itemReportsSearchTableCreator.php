@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	$itemDetailsSearchSql = 'SELECT * FROM item';
 	$itemDetailsSearchStatement = $conn->prepare($itemDetailsSearchSql);
@@ -24,15 +25,15 @@
 	// Create table rows from the selected data
 	while($row = $itemDetailsSearchStatement->fetch(PDO::FETCH_ASSOC)){
 		$output .= '<tr>' .
-						'<td>' . $row['productID'] . '</td>' .
-						'<td>' . $row['itemNumber'] . '</td>' .
+						'<td>' . e($row['productID']) . '</td>' .
+						'<td>' . e($row['itemNumber']) . '</td>' .
 						//'<td>' . $row['itemName'] . '</td>' .
-						'<td><a href="#" class="itemDetailsHover" data-toggle="popover" id="' . $row['productID'] . '">' . $row['itemName'] . '</a></td>' .
-						'<td>' . $row['discount'] . '</td>' .
-						'<td>' . $row['stock'] . '</td>' .
-						'<td>' . $row['unitPrice'] . '</td>' .
-						'<td>' . $row['status'] . '</td>' .
-						'<td>' . $row['description'] . '</td>' .
+						'<td><a href="#" class="itemDetailsHover" data-toggle="popover" id="' . e($row['productID']) . '">' . e($row['itemName']) . '</a></td>' .
+						'<td>' . e($row['discount']) . '</td>' .
+						'<td>' . e($row['stock']) . '</td>' .
+						'<td>' . e($row['unitPrice']) . '</td>' .
+						'<td>' . e($row['status']) . '</td>' .
+						'<td>' . e($row['description']) . '</td>' .
 					'</tr>';
 	}
 	

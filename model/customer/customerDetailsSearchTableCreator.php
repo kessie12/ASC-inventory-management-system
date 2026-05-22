@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	$customerDetailsSearchSql = 'SELECT * FROM customer';
 	$customerDetailsSearchStatement = $conn->prepare($customerDetailsSearchSql);
@@ -26,16 +27,16 @@
 	// Create table rows from the selected data
 	while($row = $customerDetailsSearchStatement->fetch(PDO::FETCH_ASSOC)){
 		$output .= '<tr>' .
-						'<td>' . $row['customerID'] . '</td>' .
-						'<td>' . $row['fullName'] . '</td>' .
-						'<td>' . $row['email'] . '</td>' .
-						'<td>' . $row['mobile'] . '</td>' .
-						'<td>' . $row['phone2'] . '</td>' .
-						'<td>' . $row['address'] . '</td>' .
-						'<td>' . $row['address2'] . '</td>' .
-						'<td>' . $row['city'] . '</td>' .
-						'<td>' . $row['district'] . '</td>' .
-						'<td>' . $row['status'] . '</td>' .
+						'<td>' . e($row['customerID']) . '</td>' .
+						'<td>' . e($row['fullName']) . '</td>' .
+						'<td>' . e($row['email']) . '</td>' .
+						'<td>' . e($row['mobile']) . '</td>' .
+						'<td>' . e($row['phone2']) . '</td>' .
+						'<td>' . e($row['address']) . '</td>' .
+						'<td>' . e($row['address2']) . '</td>' .
+						'<td>' . e($row['city']) . '</td>' .
+						'<td>' . e($row['district']) . '</td>' .
+						'<td>' . e($row['status']) . '</td>' .
 					'</tr>';
 	}
 	

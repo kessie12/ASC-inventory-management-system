@@ -1,11 +1,12 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	// Check if the POST request is received and if so, execute the script
 	if(isset($_POST['textBoxValue'])){
 		$output = '';
-		$vendorIDString = '%' . htmlentities($_POST['textBoxValue']) . '%';
+		$vendorIDString = '%' . $_POST['textBoxValue'] . '%';
 		
 		// Construct the SQL query to get the vendor ID
 		$sql = 'SELECT vendorID FROM vendor WHERE vendorID LIKE ?';
@@ -18,7 +19,7 @@
 			// Given vendor ID is available in DB. Hence create the dropdown list
 			$output = '<ul class="list-unstyled suggestionsList" id="vendorDetailsVendorIDSuggestionsList">';
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				$output .= '<li>' . $row['vendorID'] . '</li>';
+				$output .= '<li>' . e($row['vendorID']) . '</li>';
 			}
 			echo '</ul>';
 		} else {

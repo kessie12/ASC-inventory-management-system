@@ -1,23 +1,24 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
-	
+	require_once('../../inc/security.php');
+
 	if(isset($_POST['saleDetailsItemNumber'])){
 		
-		$itemNumber = htmlentities($_POST['saleDetailsItemNumber']);
-		$itemName = htmlentities($_POST['saleDetailsItemName']);
-		$discount = htmlentities($_POST['saleDetailsDiscount']);
-		$quantity = htmlentities($_POST['saleDetailsQuantity']);
-		$unitPrice = htmlentities($_POST['saleDetailsUnitPrice']);
-		$customerID = htmlentities($_POST['saleDetailsCustomerID']);
-		$customerName = htmlentities($_POST['saleDetailsCustomerName']);
-		$saleDate = htmlentities($_POST['saleDetailsSaleDate']);
+		$itemNumber = $_POST['saleDetailsItemNumber'];
+		$itemName = $_POST['saleDetailsItemName'];
+		$discount = $_POST['saleDetailsDiscount'];
+		$quantity = $_POST['saleDetailsQuantity'];
+		$unitPrice = $_POST['saleDetailsUnitPrice'];
+		$customerID = $_POST['saleDetailsCustomerID'];
+		$customerName = $_POST['saleDetailsCustomerName'];
+		$saleDate = $_POST['saleDetailsSaleDate'];
 		
 		// Check if mandatory fields are not empty
 		if(!empty($itemNumber) && isset($customerID) && isset($saleDate) && isset($quantity) && isset($unitPrice)){
 			
 			// Sanitize item number
-			$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
+			$itemNumber = strip_tags($itemNumber);
 			
 			// Validate item quantity. It has to be a number
 			if(filter_var($quantity, FILTER_VALIDATE_INT) === 0 || filter_var($quantity, FILTER_VALIDATE_INT)){

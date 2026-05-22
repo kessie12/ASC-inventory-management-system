@@ -9,15 +9,12 @@
 	$hashedPassword = '';
 	
 	if(isset($_POST['registerUsername'])){
-		$registerFullName = htmlentities($_POST['registerFullName']);
-		$registerUsername = htmlentities($_POST['registerUsername']);
-		$registerPassword1 = htmlentities($_POST['registerPassword1']);
-		$registerPassword2 = htmlentities($_POST['registerPassword2']);
+		$registerFullName = trim($_POST['registerFullName']);
+		$registerUsername = trim($_POST['registerUsername']);
+		$registerPassword1 = $_POST['registerPassword1'];
+		$registerPassword2 = $_POST['registerPassword2'];
 		
 		if(!empty($registerFullName) && !empty($registerUsername) && !empty($registerPassword1) && !empty($registerPassword2)){
-			
-			// Sanitize name
-			$registerFullName = filter_var($registerFullName, FILTER_SANITIZE_STRING);
 			
 			// Check if name is empty
 			if($registerFullName == ''){
@@ -54,7 +51,7 @@
 				} else {
 					// Start inserting user to DB
 					// Encrypt the password
-					$hashedPassword = md5($registerPassword1);
+					$hashedPassword = password_hash($registerPassword1, PASSWORD_DEFAULT);
 					$insertUserSql = 'INSERT INTO user(fullName, username, password) VALUES(:fullName, :username, :password)';
 					$insertUserStatement = $conn->prepare($insertUserSql);
 					$insertUserStatement->execute(['fullName' => $registerFullName, 'username' => $registerUsername, 'password' => $hashedPassword]);
