@@ -2,6 +2,8 @@
 
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
+
 	
 	if(isset($_POST['saleDetailsSaleID'])){
 
@@ -24,7 +26,7 @@
 		if(isset($saleDetailsItemNumber) && isset($saleDetailsSaleDate) && isset($saleDetailsQuantity) && isset($saleDetailsUnitPrice) && isset($saleDetailsCustomerID)){
 			
 			// Sanitize item number
-			$saleDetailsItemNumber = filter_var($saleDetailsItemNumber, FILTER_SANITIZE_STRING);
+			$saleDetailsItemNumber = strip_tags($saleDetailsItemNumber);
 			
 			// Validate item quantity. It has to be an integer
 			if(filter_var($saleDetailsQuantity, FILTER_VALIDATE_INT) === 0 || filter_var($saleDetailsQuantity, FILTER_VALIDATE_INT)){

@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	$initialStock = 0;
 	$baseImageFolder = '../../data/item_images/';
@@ -20,7 +21,7 @@
 		if(!empty($itemNumber) && !empty($itemName) && isset($quantity) && isset($unitPrice)){
 			
 			// Sanitize item number
-			$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
+			$itemNumber = strip_tags($itemNumber);
 			
 			// Validate item quantity. It has to be a number
 			if(filter_var($quantity, FILTER_VALIDATE_INT) === 0 || filter_var($quantity, FILTER_VALIDATE_INT)){

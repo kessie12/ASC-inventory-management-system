@@ -11,10 +11,11 @@
 		$loginUsername = $_POST['loginUsername'];
 		$loginPassword = $_POST['loginPassword'];
 		
-		if(!empty($loginUsername) && !empty($loginUsername)){
+		if(!empty($loginUsername) && !empty($loginPassword)){
 			
 			// Sanitize username
-			$loginUsername = filter_var($loginUsername, FILTER_SANITIZE_STRING);
+			$loginUsername = trim($_POST['loginUsername'] ?? '');
+			$loginPassword = $_POST['loginPassword'] ?? '';
 			
 			// Check if username is empty
 			if($loginUsername == ''){
@@ -27,9 +28,6 @@
 				echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>Please enter Password</div>';
 				exit();
 			}
-			
-			// Encrypt the password
-			$hashedPassword = md5($loginPassword);
 			
 			// Check the given credentials
 			$checkUserSql = 'SELECT * FROM user WHERE username = :username';

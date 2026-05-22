@@ -1,7 +1,8 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
-	
+	require_once('../../inc/security.php');
+
 	if(isset($_POST['saleDetailsItemNumber'])){
 		
 		$itemNumber = htmlentities($_POST['saleDetailsItemNumber']);
@@ -17,7 +18,7 @@
 		if(!empty($itemNumber) && isset($customerID) && isset($saleDate) && isset($quantity) && isset($unitPrice)){
 			
 			// Sanitize item number
-			$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
+			$itemNumber = strip_tags($itemNumber);
 			
 			// Validate item quantity. It has to be a number
 			if(filter_var($quantity, FILTER_VALIDATE_INT) === 0 || filter_var($quantity, FILTER_VALIDATE_INT)){
@@ -80,7 +81,7 @@
 			if($stockStatement->rowCount() > 0){
 				// Item exits in DB, therefore, can proceed to a sale
 				$row = $stockStatement->fetch(PDO::FETCH_ASSOC);
-				$currentQuantityInItemsTable = $row['stock'];
+				$currentQuantityInItemsTable = e($row['stock']);
 				
 				if($currentQuantityInItemsTable <= 0) {
 					// If currentQuantityInItemsTable is <= 0, stock is empty! that means we can't make a sell. Hence abort.
@@ -103,7 +104,7 @@
 					if($customerStatement->rowCount() > 0){
 						// Customer exits. That means both customer, item, and stocks are available. Hence start INSERT and UPDATE
 						$customerRow = $customerStatement->fetch(PDO::FETCH_ASSOC);
-						$customerName = $customerRow['fullName'];
+						$customerName = e($customerRow['fullName']);
 						
 						// INSERT data to sale table
 						$insertSaleSql = 'INSERT INTO sale(itemNumber, itemName, discount, quantity, unitPrice, customerID, customerName, saleDate) VALUES(:itemNumber, :itemName, :discount, :quantity, :unitPrice, :customerID, :customerName, :saleDate)';

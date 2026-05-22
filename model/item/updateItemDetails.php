@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	// Check if the POST query is received
 	if(isset($_POST['itemNumber'])) {
@@ -20,7 +21,7 @@
 		if(!empty($itemNumber) && !empty($itemName) && isset($itemDetailsQuantity) && isset($itemDetailsUnitPrice)){
 			
 			// Sanitize item number
-			$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
+			$itemNumber = strip_tags($itemNumber);
 			
 			// Validate item quantity. It has to be a number
 			if(filter_var($itemDetailsQuantity, FILTER_VALIDATE_INT) === 0 || filter_var($itemDetailsQuantity, FILTER_VALIDATE_INT)){

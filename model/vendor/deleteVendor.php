@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	if(isset($_POST['vendorDetailsVendorID'])){
 		
@@ -10,7 +11,7 @@
 		if(!empty($vendorDetailsVendorID)){
 			
 			// Sanitize vendorID
-			$vendorDetailsVendorID = filter_var($vendorDetailsVendorID, FILTER_SANITIZE_STRING);
+			$vendorDetailsVendorID = strip_tags($vendorDetailsVendorID);
 
 			// Check if the customer is in the database
 			$vendorSql = 'SELECT vendorID FROM vendor WHERE vendorID=:vendorID';

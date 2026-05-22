@@ -1,7 +1,8 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
-	
+	require_once('../../inc/security.php');
+
 	if(isset($_POST['purchaseDetailsItemNumber'])){
 
 		$purchaseDetailsItemNumber = htmlentities($_POST['purchaseDetailsItemNumber']);
@@ -42,7 +43,7 @@
 			}
 			
 			// Sanitize item number
-			$purchaseDetailsItemNumber = filter_var($purchaseDetailsItemNumber, FILTER_SANITIZE_STRING);
+			$purchaseDetailsItemNumber = strip_tags($purchaseDetailsItemNumber);
 			
 			// Validate item quantity. It has to be an integer
 			if(filter_var($purchaseDetailsQuantity, FILTER_VALIDATE_INT) === 0 || filter_var($purchaseDetailsQuantity, FILTER_VALIDATE_INT)){
@@ -74,7 +75,7 @@
 				$vendorIDStatement = $conn->prepare($vendorIDsql);
 				$vendorIDStatement->execute(['fullName' => $purchaseDetailsVendorName]);
 				$row = $vendorIDStatement->fetch(PDO::FETCH_ASSOC);
-				$vendorID = $row['vendorID'];
+				$vendorID = e($row['vendorID']);
 				
 				// Item exits in the item table, therefore, start the inserting data to purchase table
 				$insertPurchaseSql = 'INSERT INTO purchase(itemNumber, purchaseDate, itemName, unitPrice, quantity, vendorName, vendorID) VALUES(:itemNumber, :purchaseDate, :itemName, :unitPrice, :quantity, :vendorName, :vendorID)';
@@ -83,7 +84,7 @@
 				
 				// Calculate the new stock value using the existing stock in item table
 				$row = $stockStatement->fetch(PDO::FETCH_ASSOC);
-				$initialStock = $row['stock'];
+				$initialStock = e($row['stock']);
 				$newStock = $initialStock + $purchaseDetailsQuantity;
 				
 				// Update the new stock value in item table

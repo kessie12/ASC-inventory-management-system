@@ -1,6 +1,8 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
+
 	
 	// Check if the POST request is received and if so, execute the script
 	if(isset($_POST['textBoxValue'])){
@@ -16,7 +18,7 @@
 		if($stmt->rowCount() > 0){
 			$output = '<ul class="list-unstyled suggestionsList" id="itemDetailsItemNamesSuggestionsList">';
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				$output .= '<li>' . $row['itemName'] . '</li>';
+				$output .= '<li>' . e($row['itemName']) . '</li>';
 			}
 			echo '</ul>';
 		} else {

@@ -8,9 +8,9 @@
 	$hashedPassword = '';
 	
 	if(isset($_POST['resetPasswordUsername'])){
-		$resetPasswordUsername = htmlentities($_POST['resetPasswordUsername']);
-		$resetPasswordPassword1 = htmlentities($_POST['resetPasswordPassword1']);
-		$resetPasswordPassword2 = htmlentities($_POST['resetPasswordPassword2']);
+		$resetPasswordUsername = trim($_POST['resetPasswordUsername']);
+		$resetPasswordPassword1 = $_POST['resetPasswordPassword1'];
+		$resetPasswordPassword2 = $_POST['resetPasswordPassword2'];
 		
 		if(!empty($resetPasswordUsername) && !empty($resetPasswordPassword1) && !empty($resetPasswordPassword2)){
 			
@@ -44,7 +44,6 @@
 					// Start UPDATING password to DB
 					// Encrypt the password
 					$hashedPassword = password_hash($resetPasswordPassword1, PASSWORD_DEFAULT);
-
 					$updatePasswordSql = 'UPDATE user SET password = :password WHERE username = :username';
 					$updatePasswordStatement = $conn->prepare($updatePasswordSql);
 					$updatePasswordStatement->execute(['password' => $hashedPassword, 'username' => $resetPasswordUsername]);

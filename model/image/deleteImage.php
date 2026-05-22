@@ -12,7 +12,7 @@
 			if(!empty($itemImageItemNumber)){
 					
 				// Sanitize item number
-				$itemImageItemNumber = filter_var($itemImageItemNumber, FILTER_SANITIZE_STRING);
+				$itemImageItemNumber = strip_tags($itemImageItemNumber);
 				
 				// Check if itemNumber is in DB
 				$itemNumberSql = 'SELECT * FROM item WHERE itemNumber = :itemNumber';

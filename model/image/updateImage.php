@@ -4,8 +4,12 @@
 	
 	if(isset($_POST['itemImageItemNumber'])){
 		
-		$itemImageItemNumber = htmlentities($_POST['itemImageItemNumber']);
-		
+		$itemImageItemNumber = trim($_POST['itemImageItemNumber']);
+		if (!preg_match('/^[a-zA-Z0-9_-]+$/', $itemImageItemNumber)) {
+		    echo '<div class="alert alert-danger">Invalid item number.</div>';
+		    exit();
+		}
+
 		$baseImageFolder = '../../data/item_images/';
 		$itemImageFolder = '';
 		
@@ -14,10 +18,7 @@
 			// Check if the user has selected an image
 			if($_FILES['itemImageFile']['name'] != ''){
 				// Both itemNumber and image file given. Hence, proceed to next steps
-				
-				// Sanitize item number
-				$itemImageItemNumber = filter_var($itemImageItemNumber, FILTER_SANITIZE_STRING);
-				
+								
 				// Check if itemNumber is in DB
 				$itemNumberSql = 'SELECT * FROM item WHERE itemNumber = :itemNumber';
 				$itemNumberStatement = $conn->prepare($itemNumberSql);
@@ -29,13 +30,34 @@
 					$arr = explode('.', $_FILES['itemImageFile']['name']);
 					$extension = strtolower(end($arr));
 					$allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
+					$maxFileSize = 2 * 1024 * 1024; // 2 MB
+					if ($_FILES['itemImageFile']['size'] > $maxFileSize) {
+						echo '<div class="alert alert-danger">Image is too large. Maximum size is 2MB.</div>';
+						exit();
+					}
 					
+					$finfo = finfo_open(FILEINFO_MIME_TYPE);
+					$mimeType = finfo_file($finfo, $_FILES['itemImageFile']['tmp_name']);
+					finfo_close($finfo);
+
+					$allowedMimes = [
+					    'image/jpeg' => 'jpg',
+					    'image/png' => 'png',
+					    'image/gif' => 'gif'
+					];
+
+					if (!array_key_exists($mimeType, $allowedMimes)) {
+					    echo '<div class="alert alert-danger">Invalid image type.</div>';
+					    exit();
+					}
+
 					if(in_array($extension, $allowedTypes)){
 						// All good so far...
 						
 						$baseImageFolder = '../../data/item_images/';
 						$itemImageFolder = '';
-						$fileName = time() . '_' . basename($_FILES['itemImageFile']['name']);
+						$extension = $allowedMimes[$mimeType];
+						$fileName = time() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
 						
 						// Create image folder for uploading images
 						$itemImageFolder = $baseImageFolder . $itemImageItemNumber . '/';
@@ -43,7 +65,7 @@
 							// Folder already exists. Hence, do nothing
 						} else {
 							// Folder does not exist, Hence, create it
-							mkdir($itemImageFolder);
+							mkdir($itemImageFolder, 0755, true);
 						}
 						
 						$targetPath = $itemImageFolder . $fileName;

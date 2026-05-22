@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	// Check if the POST request is received and if so, execute the script
 	if(isset($_POST['textBoxValue'])){
@@ -18,7 +19,7 @@
 			// Given customer ID is available in DB. Hence create the dropdown list
 			$output = '<ul class="list-unstyled suggestionsList" id="saleDetailsCustomerIDSuggestionsList">';
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				$output .= '<li>' . $row['customerID'] . '</li>';
+				$output .= '<li>' . e($row['customerID']) . '</li>';
 			}
 			echo '</ul>';
 		} else {

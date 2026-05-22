@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	if(isset($_POST['customerDetailsCustomerID'])){
 		
@@ -10,7 +11,7 @@
 		if(!empty($customerDetailsCustomerID)){
 			
 			// Sanitize customerID
-			$customerDetailsCustomerID = filter_var($customerDetailsCustomerID, FILTER_SANITIZE_STRING);
+			$customerDetailsCustomerID = strip_tags($customerDetailsCustomerID);
 
 			// Check if the customer is in the database
 			$customerSql = 'SELECT customerID FROM customer WHERE customerID=:customerID';
