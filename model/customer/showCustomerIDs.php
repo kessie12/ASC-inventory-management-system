@@ -6,7 +6,7 @@
 	// Check if the POST request is received and if so, execute the script
 	if(isset($_POST['textBoxValue'])){
 		$output = '';
-		$customerIDString = '%' . htmlentities($_POST['textBoxValue']) . '%';
+		$customerIDString = '%' . $_POST['textBoxValue'] . '%';
 		
 		// Construct the SQL query to get the customer ID
 		$sql = 'SELECT customerID FROM customer WHERE customerID LIKE ?';

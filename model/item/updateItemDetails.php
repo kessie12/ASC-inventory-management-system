@@ -6,13 +6,13 @@
 	// Check if the POST query is received
 	if(isset($_POST['itemNumber'])) {
 		
-		$itemNumber = htmlentities($_POST['itemNumber']);
-		$itemName = htmlentities($_POST['itemDetailsItemName']);
-		$discount = htmlentities($_POST['itemDetailsDiscount']);
-		$itemDetailsQuantity = htmlentities($_POST['itemDetailsQuantity']);
-		$itemDetailsUnitPrice = htmlentities($_POST['itemDetailsUnitPrice']);
-		$status = htmlentities($_POST['itemDetailsStatus']);
-		$description = htmlentities($_POST['itemDetailsDescription']);
+		$itemNumber = $_POST['itemNumber'];
+		$itemName = $_POST['itemDetailsItemName'];
+		$discount = $_POST['itemDetailsDiscount'];
+		$itemDetailsQuantity = $_POST['itemDetailsQuantity'];
+		$itemDetailsUnitPrice = $_POST['itemDetailsUnitPrice'];
+		$status = $_POST['itemDetailsStatus'];
+		$description = $_POST['itemDetailsDescription'];
 		
 		$initialStock = 0;
 		$newStock = 0;

@@ -6,16 +6,16 @@
 	// Check if the POST query is received
 	if(isset($_POST['customerDetailsCustomerID'])) {
 		
-		$customerDetailsCustomerID = htmlentities($_POST['customerDetailsCustomerID']);
-		$customerDetailsCustomerFullName = htmlentities($_POST['customerDetailsCustomerFullName']);
-		$customerDetailsCustomerMobile = htmlentities($_POST['customerDetailsCustomerMobile']);
-		$customerDetailsCustomerPhone2 = htmlentities($_POST['customerDetailsCustomerPhone2']);
-		$customerDetailsCustomerEmail = htmlentities($_POST['customerDetailsCustomerEmail']);
-		$customerDetailsCustomerAddress = htmlentities($_POST['customerDetailsCustomerAddress']);
-		$customerDetailsCustomerAddress2 = htmlentities($_POST['customerDetailsCustomerAddress2']);
-		$customerDetailsCustomerCity = htmlentities($_POST['customerDetailsCustomerCity']);
-		$customerDetailsCustomerDistrict = htmlentities($_POST['customerDetailsCustomerDistrict']);
-		$customerDetailsStatus = htmlentities($_POST['customerDetailsStatus']);
+		$customerDetailsCustomerID = $_POST['customerDetailsCustomerID'];
+		$customerDetailsCustomerFullName = $_POST['customerDetailsCustomerFullName'];
+		$customerDetailsCustomerMobile = $_POST['customerDetailsCustomerMobile'];
+		$customerDetailsCustomerPhone2 = $_POST['customerDetailsCustomerPhone2'];
+		$customerDetailsCustomerEmail = $_POST['customerDetailsCustomerEmail'];
+		$customerDetailsCustomerAddress = $_POST['customerDetailsCustomerAddress'];
+		$customerDetailsCustomerAddress2 = $_POST['customerDetailsCustomerAddress2'];
+		$customerDetailsCustomerCity = $_POST['customerDetailsCustomerCity'];
+		$customerDetailsCustomerDistrict = $_POST['customerDetailsCustomerDistrict'];
+		$customerDetailsStatus = $_POST['customerDetailsStatus'];
 		
 		// Check if mandatory fields are not empty
 		if(isset($customerDetailsCustomerFullName) && isset($customerDetailsCustomerMobile) && isset($customerDetailsCustomerAddress)) {

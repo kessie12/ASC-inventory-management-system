@@ -5,7 +5,7 @@
 	
 	if(isset($_POST['customerDetailsCustomerID'])){
 		
-		$customerDetailsCustomerID = htmlentities($_POST['customerDetailsCustomerID']);
+		$customerDetailsCustomerID = $_POST['customerDetailsCustomerID'];
 		
 		// Check if mandatory fields are not empty
 		if(!empty($customerDetailsCustomerID)){

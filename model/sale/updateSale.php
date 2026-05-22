@@ -7,15 +7,15 @@
 	
 	if(isset($_POST['saleDetailsSaleID'])){
 
-		$saleDetailsItemNumber = htmlentities($_POST['saleDetailsItemNumber']);
-		$saleDetailsSaleDate = htmlentities($_POST['saleDetailsSaleDate']);
-		$saleDetailsItemName = htmlentities($_POST['saleDetailsItemName']);
-		$saleDetailsQuantity = htmlentities($_POST['saleDetailsQuantity']);
-		$saleDetailsUnitPrice = htmlentities($_POST['saleDetailsUnitPrice']);
-		$saleDetailsSaleID = htmlentities($_POST['saleDetailsSaleID']);
-		$saleDetailsCustomerName = htmlentities($_POST['saleDetailsCustomerName']);
-		$saleDetailsDiscount = htmlentities($_POST['saleDetailsDiscount']);
-		$saleDetailsCustomerID = htmlentities($_POST['saleDetailsCustomerID']);
+		$saleDetailsItemNumber = $_POST['saleDetailsItemNumber'];
+		$saleDetailsSaleDate = $_POST['saleDetailsSaleDate'];
+		$saleDetailsItemName = $_POST['saleDetailsItemName'];
+		$saleDetailsQuantity = $_POST['saleDetailsQuantity'];
+		$saleDetailsUnitPrice = $_POST['saleDetailsUnitPrice'];
+		$saleDetailsSaleID = $_POST['saleDetailsSaleID'];
+		$saleDetailsCustomerName = $_POST['saleDetailsCustomerName'];
+		$saleDetailsDiscount = $_POST['saleDetailsDiscount'];
+		$saleDetailsCustomerID = $_POST['saleDetailsCustomerID'];
 		
 		$quantityInOriginalOrder = 0;
 		$quantityInNewOrder = 0;

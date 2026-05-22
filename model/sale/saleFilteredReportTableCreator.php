@@ -8,8 +8,8 @@
 	$totalPrice = 0;
 	
 	if(isset($_POST['startDate'])){
-		$startDate = htmlentities($_POST['startDate']);
-		$endDate = htmlentities($_POST['endDate']);
+		$startDate = $_POST['startDate'];
+		$endDate = $_POST['endDate'];
 		
 		$saleFilteredReportSql = 'SELECT * FROM sale WHERE saleDate BETWEEN :startDate AND :endDate';
 		$saleFilteredReportStatement = $conn->prepare($saleFilteredReportSql);
@@ -34,9 +34,9 @@
 		
 		// Create table rows from the selected data
 		while($row = $saleFilteredReportStatement->fetch(PDO::FETCH_ASSOC)){
-			$uPrice = e($row['unitPrice']);
-			$qty = e($row['quantity']);
-			$discount = e($row['discount']);
+			$uPrice = $row['unitPrice'];
+			$qty = $row['quantity'];
+			$discount = $row['discount'];
 			$totalPrice = $uPrice * $qty * ((100 - $discount)/100);
 		
 			$output .= '<tr>' .

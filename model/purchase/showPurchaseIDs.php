@@ -7,7 +7,7 @@
 	// Check if the POST request is received and if so, execute the script
 	if(isset($_POST['textBoxValue'])){
 		$output = '';
-		$purchaseIDString = '%' . htmlentities($_POST['textBoxValue']) . '%';
+		$purchaseIDString = '%' . $_POST['textBoxValue'] . '%';
 		
 		// Construct the SQL query to get the purchase ID
 		$sql = 'SELECT purchaseID FROM purchase WHERE purchaseID LIKE ?';

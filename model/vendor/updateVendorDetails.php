@@ -6,16 +6,16 @@
 	// Check if the POST query is received
 	if(isset($_POST['vendorDetailsVendorID'])) {
 		
-		$vendorDetailsVendorID = htmlentities($_POST['vendorDetailsVendorID']);
-		$vendorDetailsVendorFullName = htmlentities($_POST['vendorDetailsVendorFullName']);
-		$vendorDetailsVendorMobile = htmlentities($_POST['vendorDetailsVendorMobile']);
-		$vendorDetailsVendorPhone2 = htmlentities($_POST['vendorDetailsVendorPhone2']);
-		$vendorDetailsVendorEmail = htmlentities($_POST['vendorDetailsVendorEmail']);
-		$vendorDetailsVendorAddress = htmlentities($_POST['vendorDetailsVendorAddress']);
-		$vendorDetailsVendorAddress2 = htmlentities($_POST['vendorDetailsVendorAddress2']);
-		$vendorDetailsVendorCity = htmlentities($_POST['vendorDetailsVendorCity']);
-		$vendorDetailsVendorDistrict = htmlentities($_POST['vendorDetailsVendorDistrict']);
-		$vendorDetailsStatus = htmlentities($_POST['vendorDetailsStatus']);
+		$vendorDetailsVendorID = $_POST['vendorDetailsVendorID'];
+		$vendorDetailsVendorFullName = $_POST['vendorDetailsVendorFullName'];
+		$vendorDetailsVendorMobile = $_POST['vendorDetailsVendorMobile'];
+		$vendorDetailsVendorPhone2 = $_POST['vendorDetailsVendorPhone2'];
+		$vendorDetailsVendorEmail = $_POST['vendorDetailsVendorEmail'];
+		$vendorDetailsVendorAddress = $_POST['vendorDetailsVendorAddress'];
+		$vendorDetailsVendorAddress2 = $_POST['vendorDetailsVendorAddress2'];
+		$vendorDetailsVendorCity = $_POST['vendorDetailsVendorCity'];
+		$vendorDetailsVendorDistrict = $_POST['vendorDetailsVendorDistrict'];
+		$vendorDetailsStatus = $_POST['vendorDetailsStatus'];
 		
 		
 		// Check if vendorID is given or not. If not given, the display a message

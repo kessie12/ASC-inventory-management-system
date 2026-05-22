@@ -9,13 +9,13 @@
 	
 	if(isset($_POST['itemDetailsItemNumber'])){
 		
-		$itemNumber = htmlentities($_POST['itemDetailsItemNumber']);
-		$itemName = htmlentities($_POST['itemDetailsItemName']);
-		$discount = htmlentities($_POST['itemDetailsDiscount']);
-		$quantity = htmlentities($_POST['itemDetailsQuantity']);
-		$unitPrice = htmlentities($_POST['itemDetailsUnitPrice']);
-		$status = htmlentities($_POST['itemDetailsStatus']);
-		$description = htmlentities($_POST['itemDetailsDescription']);
+		$itemNumber = $_POST['itemDetailsItemNumber'];
+		$itemName = $_POST['itemDetailsItemName'];
+		$discount = $_POST['itemDetailsDiscount'];
+		$quantity = $_POST['itemDetailsQuantity'];
+		$unitPrice = $_POST['itemDetailsUnitPrice'];
+		$status = $_POST['itemDetailsStatus'];
+		$description = $_POST['itemDetailsDescription'];
 		
 		// Check if mandatory fields are not empty
 		if(!empty($itemNumber) && !empty($itemName) && isset($quantity) && isset($unitPrice)){

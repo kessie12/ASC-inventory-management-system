@@ -3,7 +3,7 @@
 	require_once('../../inc/config/db.php');
 	require_once('../../inc/security.php');
 	
-	$itemNumber = htmlentities($_POST['itemDetailsItemNumber']);
+	$itemNumber = $_POST['itemDetailsItemNumber'];
 	
 	if(isset($_POST['itemDetailsItemNumber'])){
 		

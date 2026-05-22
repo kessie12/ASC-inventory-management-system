@@ -8,13 +8,13 @@
 	
 	if(isset($_POST['purchaseDetailsPurchaseID'])){
 
-		$purchaseDetailsItemNumber = htmlentities($_POST['purchaseDetailsItemNumber']);
-		$purchaseDetailsPurchaseDate = htmlentities($_POST['purchaseDetailsPurchaseDate']);
-		$purchaseDetailsItemName = htmlentities($_POST['purchaseDetailsItemName']);
-		$purchaseDetailsQuantity = htmlentities($_POST['purchaseDetailsQuantity']);
-		$purchaseDetailsUnitPrice = htmlentities($_POST['purchaseDetailsUnitPrice']);
-		$purchaseDetailsPurchaseID = htmlentities($_POST['purchaseDetailsPurchaseID']);
-		$purchaseDetailsVendorName = htmlentities($_POST['purchaseDetailsVendorName']);
+		$purchaseDetailsItemNumber = $_POST['purchaseDetailsItemNumber'];
+		$purchaseDetailsPurchaseDate = $_POST['purchaseDetailsPurchaseDate'];
+		$purchaseDetailsItemName = $_POST['purchaseDetailsItemName'];
+		$purchaseDetailsQuantity = $_POST['purchaseDetailsQuantity'];
+		$purchaseDetailsUnitPrice = $_POST['purchaseDetailsUnitPrice'];
+		$purchaseDetailsPurchaseID = $_POST['purchaseDetailsPurchaseID'];
+		$purchaseDetailsVendorName = $_POST['purchaseDetailsVendorName'];
 		
 		$quantityInOriginalOrder = 0;
 		$quantityInNewOrder = 0;
@@ -74,14 +74,14 @@
 			$vendorIDStatement = $conn->prepare($vendorIDsql);
 			$vendorIDStatement->execute(['fullName' => $purchaseDetailsVendorName]);
 			$row = $vendorIDStatement->fetch(PDO::FETCH_ASSOC);
-			$vendorID = e($row['vendorID']);
+			$vendorID = $row['vendorID'];
 			
 			if($originalPurchaseQuantityStatement->rowCount() > 0){
 				
 				// Purchase details exist in DB. Hence proceed to calculate the stock
 				$originalQtyRow = $originalPurchaseQuantityStatement->fetch(PDO::FETCH_ASSOC);
-				$quantityInOriginalOrder = e($originalQtyRow['quantity']);
-				$originalOrderItemNumber = e($originalQtyRow['itemNumber']);
+				$quantityInOriginalOrder = $originalQtyRow['quantity'];
+				$originalOrderItemNumber = $originalQtyRow['itemNumber'];
 
 				// Check if the user wants to update the itemNumber too. In that case,
 				// we need to remove the quantity of the original order for that item and 
@@ -104,8 +104,8 @@
 					
 					// Calculate the new stock value for new item using the existing stock in item table
 					$newItemRow = $newItemCurrentStockStatement->fetch(PDO::FETCH_ASSOC);
-					$originalQuantityForNewItem = e($newItemRow['stock']);
-					$enteredQuantityForNewItem = e($purchaseDetailsQuantity);
+					$originalQuantityForNewItem = $newItemRow['stock'];
+					$enteredQuantityForNewItem = $purchaseDetailsQuantity;
 					$newItemNewStock = $originalQuantityForNewItem + $enteredQuantityForNewItem;
 					
 					// UPDATE the stock for new item in item table
@@ -120,7 +120,7 @@
 					
 					// Calculate the new stock value for the previous item using the existing stock in item table
 					$previousItemRow = $previousItemCurrentStockStatement->fetch(PDO::FETCH_ASSOC);
-					$currentQuantityForPreviousItem = e($previousItemRow['stock']);
+					$currentQuantityForPreviousItem = $previousItemRow['stock'];
 					$previousItemNewStock = $currentQuantityForPreviousItem - $quantityInOriginalOrder;
 					
 					// UPDATE the stock for previous item in item table
@@ -149,8 +149,8 @@
 						
 						// Calculate the new stock value using the existing stock in item table
 						$row = $stockStatement->fetch(PDO::FETCH_ASSOC);
-						$quantityInNewOrder = e($purchaseDetailsQuantity);
-						$originalStockInItemTable = e($row['stock']);
+						$quantityInNewOrder = $purchaseDetailsQuantity;
+						$originalStockInItemTable = $row['stock'];
 						$newStock = $originalStockInItemTable + ($quantityInNewOrder - $quantityInOriginalOrder);
 						
 						// Update the new stock value in item table.

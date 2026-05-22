@@ -5,15 +5,15 @@
 	
 	if(isset($_POST['vendorDetailsStatus'])){
 		
-		$fullName = htmlentities($_POST['vendorDetailsVendorFullName']);
-		$email = htmlentities($_POST['vendorDetailsVendorEmail']);
-		$mobile = htmlentities($_POST['vendorDetailsVendorMobile']);
-		$phone2 = htmlentities($_POST['vendorDetailsVendorPhone2']);
-		$address = htmlentities($_POST['vendorDetailsVendorAddress']);
-		$address2 = htmlentities($_POST['vendorDetailsVendorAddress2']);
-		$city = htmlentities($_POST['vendorDetailsVendorCity']);
-		$district = htmlentities($_POST['vendorDetailsVendorDistrict']);
-		$status = htmlentities($_POST['vendorDetailsStatus']);
+		$fullName = $_POST['vendorDetailsVendorFullName'];
+		$email = $_POST['vendorDetailsVendorEmail'];
+		$mobile = $_POST['vendorDetailsVendorMobile'];
+		$phone2 = $_POST['vendorDetailsVendorPhone2'];
+		$address = $_POST['vendorDetailsVendorAddress'];
+		$address2 = $_POST['vendorDetailsVendorAddress2'];
+		$city = $_POST['vendorDetailsVendorCity'];
+		$district = $_POST['vendorDetailsVendorDistrict'];
+		$status = $_POST['vendorDetailsStatus'];
 	
 		if(isset($fullName) && isset($mobile) && isset($address)) {
 			// Validate mobile number

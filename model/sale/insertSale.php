@@ -5,14 +5,14 @@
 
 	if(isset($_POST['saleDetailsItemNumber'])){
 		
-		$itemNumber = htmlentities($_POST['saleDetailsItemNumber']);
-		$itemName = htmlentities($_POST['saleDetailsItemName']);
-		$discount = htmlentities($_POST['saleDetailsDiscount']);
-		$quantity = htmlentities($_POST['saleDetailsQuantity']);
-		$unitPrice = htmlentities($_POST['saleDetailsUnitPrice']);
-		$customerID = htmlentities($_POST['saleDetailsCustomerID']);
-		$customerName = htmlentities($_POST['saleDetailsCustomerName']);
-		$saleDate = htmlentities($_POST['saleDetailsSaleDate']);
+		$itemNumber = $_POST['saleDetailsItemNumber'];
+		$itemName = $_POST['saleDetailsItemName'];
+		$discount = $_POST['saleDetailsDiscount'];
+		$quantity = $_POST['saleDetailsQuantity'];
+		$unitPrice = $_POST['saleDetailsUnitPrice'];
+		$customerID = $_POST['saleDetailsCustomerID'];
+		$customerName = $_POST['saleDetailsCustomerName'];
+		$saleDate = $_POST['saleDetailsSaleDate'];
 		
 		// Check if mandatory fields are not empty
 		if(!empty($itemNumber) && isset($customerID) && isset($saleDate) && isset($quantity) && isset($unitPrice)){
@@ -81,7 +81,7 @@
 			if($stockStatement->rowCount() > 0){
 				// Item exits in DB, therefore, can proceed to a sale
 				$row = $stockStatement->fetch(PDO::FETCH_ASSOC);
-				$currentQuantityInItemsTable = e($row['stock']);
+				$currentQuantityInItemsTable = $row['stock'];
 				
 				if($currentQuantityInItemsTable <= 0) {
 					// If currentQuantityInItemsTable is <= 0, stock is empty! that means we can't make a sell. Hence abort.
@@ -104,7 +104,7 @@
 					if($customerStatement->rowCount() > 0){
 						// Customer exits. That means both customer, item, and stocks are available. Hence start INSERT and UPDATE
 						$customerRow = $customerStatement->fetch(PDO::FETCH_ASSOC);
-						$customerName = e($customerRow['fullName']);
+						$customerName = $customerRow['fullName'];
 						
 						// INSERT data to sale table
 						$insertSaleSql = 'INSERT INTO sale(itemNumber, itemName, discount, quantity, unitPrice, customerID, customerName, saleDate) VALUES(:itemNumber, :itemName, :discount, :quantity, :unitPrice, :customerID, :customerName, :saleDate)';

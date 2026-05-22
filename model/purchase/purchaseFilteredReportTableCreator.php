@@ -8,8 +8,8 @@
 	$totalPrice = 0;
 	
 	if(isset($_POST['startDate'])){
-		$startDate = htmlentities($_POST['startDate']);
-		$endDate = htmlentities($_POST['endDate']);
+		$startDate = $_POST['startDate'];
+		$endDate = $_POST['endDate'];
 		
 		$purchaseFilteredReportSql = 'SELECT * FROM purchase WHERE purchaseDate BETWEEN :startDate AND :endDate';
 		$purchaseFilteredReportStatement = $conn->prepare($purchaseFilteredReportSql);

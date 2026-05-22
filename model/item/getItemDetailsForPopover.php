@@ -5,7 +5,7 @@
 	
 	if(isset($_POST['id'])){
 		
-		$productID = htmlentities($_POST['id']);
+		$productID = $_POST['id'];
 		
 			
 		$defaultImgFolder = 'data/item_images/';

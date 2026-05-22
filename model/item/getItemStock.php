@@ -6,7 +6,7 @@
 	// Execute the script if the POST request is submitted
 	if(isset($_POST['itemNumber'])){
 		
-		$itemNumber = htmlentities($_POST['itemNumber']);
+		$itemNumber = $_POST['itemNumber'];
 		
 		$itemDetailsSql = 'SELECT * FROM item WHERE itemNumber = :itemNumber';
 		$itemDetailsStatement = $conn->prepare($itemDetailsSql);

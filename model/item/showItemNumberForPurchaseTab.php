@@ -7,7 +7,7 @@
 	// Check if the POST request is received and if so, execute the script
 	if(isset($_POST['textBoxValue'])){
 		$output = '';
-		$itemNumberString = '%' . htmlentities($_POST['textBoxValue']) . '%';
+		$itemNumberString = '%' . $_POST['textBoxValue'] . '%';
 		
 		// Construct the SQL query to get the item name
 		$sql = 'SELECT itemNumber FROM item WHERE itemNumber LIKE ?';

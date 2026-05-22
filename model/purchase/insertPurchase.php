@@ -5,12 +5,12 @@
 
 	if(isset($_POST['purchaseDetailsItemNumber'])){
 
-		$purchaseDetailsItemNumber = htmlentities($_POST['purchaseDetailsItemNumber']);
-		$purchaseDetailsPurchaseDate = htmlentities($_POST['purchaseDetailsPurchaseDate']);
-		$purchaseDetailsItemName = htmlentities($_POST['purchaseDetailsItemName']);
-		$purchaseDetailsQuantity = htmlentities($_POST['purchaseDetailsQuantity']);
-		$purchaseDetailsUnitPrice = htmlentities($_POST['purchaseDetailsUnitPrice']);
-		$purchaseDetailsVendorName = htmlentities($_POST['purchaseDetailsVendorName']);
+		$purchaseDetailsItemNumber = $_POST['purchaseDetailsItemNumber'];
+		$purchaseDetailsPurchaseDate = $_POST['purchaseDetailsPurchaseDate'];
+		$purchaseDetailsItemName = $_POST['purchaseDetailsItemName'];
+		$purchaseDetailsQuantity = $_POST['purchaseDetailsQuantity'];
+		$purchaseDetailsUnitPrice = $_POST['purchaseDetailsUnitPrice'];
+		$purchaseDetailsVendorName = $_POST['purchaseDetailsVendorName'];
 		
 		$initialStock = 0;
 		$newStock = 0;
@@ -75,7 +75,7 @@
 				$vendorIDStatement = $conn->prepare($vendorIDsql);
 				$vendorIDStatement->execute(['fullName' => $purchaseDetailsVendorName]);
 				$row = $vendorIDStatement->fetch(PDO::FETCH_ASSOC);
-				$vendorID = e($row['vendorID']);
+				$vendorID = $row['vendorID'];
 				
 				// Item exits in the item table, therefore, start the inserting data to purchase table
 				$insertPurchaseSql = 'INSERT INTO purchase(itemNumber, purchaseDate, itemName, unitPrice, quantity, vendorName, vendorID) VALUES(:itemNumber, :purchaseDate, :itemName, :unitPrice, :quantity, :vendorName, :vendorID)';
@@ -84,7 +84,7 @@
 				
 				// Calculate the new stock value using the existing stock in item table
 				$row = $stockStatement->fetch(PDO::FETCH_ASSOC);
-				$initialStock = e($row['stock']);
+				$initialStock = $row['stock'];
 				$newStock = $initialStock + $purchaseDetailsQuantity;
 				
 				// Update the new stock value in item table

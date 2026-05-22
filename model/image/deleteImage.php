@@ -4,7 +4,7 @@
 	
 	if(isset($_POST['itemImageItemNumber'])){
 
-			$itemImageItemNumber = htmlentities($_POST['itemImageItemNumber']);
+			$itemImageItemNumber = $_POST['itemImageItemNumber'];
 			
 			$baseImageFolder = '../../data/item_images/';
 			$itemImageFolder = '';

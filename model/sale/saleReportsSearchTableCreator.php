@@ -30,9 +30,9 @@
 	
 	// Create table rows from the selected data
 	while($row = $saleDetailsSearchStatement->fetch(PDO::FETCH_ASSOC)){
-		$uPrice = e($row['unitPrice']);
-		$qty = e($row['quantity']);
-		$discount = e($row['discount']);
+		$uPrice = $row['unitPrice'];
+		$qty = $row['quantity'];
+		$discount = $row['discount'];
 		$totalPrice = $uPrice * $qty * ((100 - $discount)/100);
 		
 		$output .= '<tr>' .

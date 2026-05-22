@@ -6,7 +6,7 @@
 	// Check if the POST request is received and if so, execute the script
 	if(isset($_POST['textBoxValue'])){
 		$output = '';
-		$vendorIDString = '%' . htmlentities($_POST['textBoxValue']) . '%';
+		$vendorIDString = '%' . $_POST['textBoxValue'] . '%';
 		
 		// Construct the SQL query to get the vendor ID
 		$sql = 'SELECT vendorID FROM vendor WHERE vendorID LIKE ?';
