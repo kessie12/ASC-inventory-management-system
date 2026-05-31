@@ -6,6 +6,7 @@
 	$itemNumber = $_POST['itemDetailsItemNumber'];
 	
 	if(isset($_POST['itemDetailsItemNumber'])){
+		$itemNumber = htmlentities($_POST['itemDetailsItemNumber']);
 		
 		// Check if mandatory fields are not empty
 		if(!empty($itemNumber)){
