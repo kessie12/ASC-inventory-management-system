@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');	
 	
 	$uPrice = 0;
 	$qty = 0;
@@ -33,15 +34,15 @@
 		$totalPrice = $uPrice * $qty;
 		
 		$output .= '<tr>' .
-						'<td>' . $row['purchaseID'] . '</td>' .
-						'<td>' . $row['itemNumber'] . '</td>' .
-						'<td>' . $row['purchaseDate'] . '</td>' .
-						'<td>' . $row['itemName'] . '</td>' .
-						'<td>' . $row['vendorName'] . '</td>' .
-						'<td>' . $row['vendorID'] . '</td>' .
-						'<td>' . $row['quantity'] . '</td>' .
-						'<td>' . $row['unitPrice'] . '</td>' .
-						'<td>' . $totalPrice . '</td>' .
+						'<td>' . e($row['purchaseID']) . '</td>' .
+						'<td>' . e($row['itemNumber']) . '</td>' .
+						'<td>' . e($row['purchaseDate']) . '</td>' .
+						'<td>' . e($row['itemName']) . '</td>' .
+						'<td>' . e($row['vendorName']) . '</td>' .
+						'<td>' . e($row['vendorID']) . '</td>' .
+						'<td>' . e($row['quantity']) . '</td>' .
+						'<td>' . e($row['unitPrice']) . '</td>' .
+						'<td>' . e($totalPrice) . '</td>' .
 					'</tr>';
 	}
 	

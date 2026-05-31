@@ -1,11 +1,12 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 
 	// Execute the script if the POST request is submitted
 	if(isset($_POST['vendorDetailsVendorID'])){
 		
-		$vendorID = htmlentities($_POST['vendorDetailsVendorID']);
+		$vendorID = $_POST['vendorDetailsVendorID'];
 		
 		$vendorDetailsSql = 'SELECT * FROM vendor WHERE vendorID = :vendorID';
 		$vendorDetailsStatement = $conn->prepare($vendorDetailsSql);

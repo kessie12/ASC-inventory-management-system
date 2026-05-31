@@ -4,7 +4,7 @@
 	
 	if(isset($_POST['itemImageItemNumber'])){
 
-			$itemImageItemNumber = htmlentities($_POST['itemImageItemNumber']);
+			$itemImageItemNumber = $_POST['itemImageItemNumber'];
 			
 			$baseImageFolder = '../../data/item_images/';
 			$itemImageFolder = '';
@@ -12,7 +12,7 @@
 			if(!empty($itemImageItemNumber)){
 					
 				// Sanitize item number
-				$itemImageItemNumber = filter_var($itemImageItemNumber, FILTER_SANITIZE_STRING);
+				$itemImageItemNumber = strip_tags($itemImageItemNumber);
 				
 				// Check if itemNumber is in DB
 				$itemNumberSql = 'SELECT * FROM item WHERE itemNumber = :itemNumber';

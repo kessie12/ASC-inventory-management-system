@@ -1,6 +1,7 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	$initialStock = 0;
 	$baseImageFolder = '../../data/item_images/';
@@ -8,19 +9,19 @@
 	
 	if(isset($_POST['itemDetailsItemNumber'])){
 		
-		$itemNumber = htmlentities($_POST['itemDetailsItemNumber']);
-		$itemName = htmlentities($_POST['itemDetailsItemName']);
-		$discount = htmlentities($_POST['itemDetailsDiscount']);
-		$quantity = htmlentities($_POST['itemDetailsQuantity']);
-		$unitPrice = htmlentities($_POST['itemDetailsUnitPrice']);
-		$status = htmlentities($_POST['itemDetailsStatus']);
-		$description = htmlentities($_POST['itemDetailsDescription']);
+		$itemNumber = $_POST['itemDetailsItemNumber'];
+		$itemName = $_POST['itemDetailsItemName'];
+		$discount = $_POST['itemDetailsDiscount'];
+		$quantity = $_POST['itemDetailsQuantity'];
+		$unitPrice = $_POST['itemDetailsUnitPrice'];
+		$status = $_POST['itemDetailsStatus'];
+		$description = $_POST['itemDetailsDescription'];
 		
 		// Check if mandatory fields are not empty
 		if(!empty($itemNumber) && !empty($itemName) && isset($quantity) && isset($unitPrice)){
 			
 			// Sanitize item number
-			$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
+			$itemNumber = strip_tags($itemNumber);
 			
 			// Validate item quantity. It has to be a number
 			if(filter_var($quantity, FILTER_VALIDATE_INT) === 0 || filter_var($quantity, FILTER_VALIDATE_INT)){

@@ -1,17 +1,18 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	// Check if the POST query is received
 	if(isset($_POST['itemNumber'])) {
 		
-		$itemNumber = htmlentities($_POST['itemNumber']);
-		$itemName = htmlentities($_POST['itemDetailsItemName']);
-		$discount = htmlentities($_POST['itemDetailsDiscount']);
-		$itemDetailsQuantity = htmlentities($_POST['itemDetailsQuantity']);
-		$itemDetailsUnitPrice = htmlentities($_POST['itemDetailsUnitPrice']);
-		$status = htmlentities($_POST['itemDetailsStatus']);
-		$description = htmlentities($_POST['itemDetailsDescription']);
+		$itemNumber = $_POST['itemNumber'];
+		$itemName = $_POST['itemDetailsItemName'];
+		$discount = $_POST['itemDetailsDiscount'];
+		$itemDetailsQuantity = $_POST['itemDetailsQuantity'];
+		$itemDetailsUnitPrice = $_POST['itemDetailsUnitPrice'];
+		$status = $_POST['itemDetailsStatus'];
+		$description = $_POST['itemDetailsDescription'];
 		
 		$initialStock = 0;
 		$newStock = 0;
@@ -20,7 +21,7 @@
 		if(!empty($itemNumber) && !empty($itemName) && isset($itemDetailsQuantity) && isset($itemDetailsUnitPrice)){
 			
 			// Sanitize item number
-			$itemNumber = filter_var($itemNumber, FILTER_SANITIZE_STRING);
+			$itemNumber = strip_tags($itemNumber);
 			
 			// Validate item quantity. It has to be a number
 			if(filter_var($itemDetailsQuantity, FILTER_VALIDATE_INT) === 0 || filter_var($itemDetailsQuantity, FILTER_VALIDATE_INT)){

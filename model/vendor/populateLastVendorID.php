@@ -1,12 +1,13 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	$sql = "SELECT MAX(vendorID) FROM vendor";
 	$stmt = $conn->prepare($sql);
 	$stmt->execute();
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-	echo $row['MAX(vendorID)'];
+	echo e($row['MAX(vendorID)']);
 	$stmt->closeCursor();
 ?>

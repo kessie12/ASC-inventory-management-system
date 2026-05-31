@@ -1,11 +1,13 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
+
 	
 	// Check if the POST request is received and if so, execute the script
 	if(isset($_POST['textBoxValue'])){
 		$output = '';
-		$purchaseIDString = '%' . htmlentities($_POST['textBoxValue']) . '%';
+		$purchaseIDString = '%' . $_POST['textBoxValue'] . '%';
 		
 		// Construct the SQL query to get the purchase ID
 		$sql = 'SELECT purchaseID FROM purchase WHERE purchaseID LIKE ?';
@@ -18,7 +20,7 @@
 			// Given purchase ID is available in DB. Hence create the dropdown list
 			$output = '<ul class="list-unstyled suggestionsList" id="purchaseDetailsPurchaseIDSuggestionsList">';
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				$output .= '<li>' . $row['purchaseID'] . '</li>';
+				$output .= '<li>' . e($row['purchaseID']) . '</li>';
 			}
 			echo '</ul>';
 		} else {

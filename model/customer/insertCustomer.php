@@ -1,18 +1,19 @@
 <?php
 	require_once('../../inc/config/constants.php');
 	require_once('../../inc/config/db.php');
+	require_once('../../inc/security.php');
 	
 	if(isset($_POST['customerDetailsCustomerFullName'])){
 		
-		$fullName = htmlentities($_POST['customerDetailsCustomerFullName']);
-		$email = htmlentities($_POST['customerDetailsCustomerEmail']);
-		$mobile = htmlentities($_POST['customerDetailsCustomerMobile']);
-		$phone2 = htmlentities($_POST['customerDetailsCustomerPhone2']);
-		$address = htmlentities($_POST['customerDetailsCustomerAddress']);
-		$address2 = htmlentities($_POST['customerDetailsCustomerAddress2']);
-		$city = htmlentities($_POST['customerDetailsCustomerCity']);
-		$district = htmlentities($_POST['customerDetailsCustomerDistrict']);
-		$status = htmlentities($_POST['customerDetailsStatus']);
+		$fullName = $_POST['customerDetailsCustomerFullName'];
+		$email = $_POST['customerDetailsCustomerEmail'];
+		$mobile = $_POST['customerDetailsCustomerMobile'];
+		$phone2 = $_POST['customerDetailsCustomerPhone2'];
+		$address = $_POST['customerDetailsCustomerAddress'];
+		$address2 = $_POST['customerDetailsCustomerAddress2'];
+		$city = $_POST['customerDetailsCustomerCity'];
+		$district = $_POST['customerDetailsCustomerDistrict'];
+		$status = $_POST['customerDetailsStatus'];
 		
 		if(isset($fullName) && isset($mobile) && isset($address)) {
 			// Validate mobile number
